@@ -1,4 +1,4 @@
-
+var companydata;
 $(function () {
 
     echarts_1();
@@ -18,16 +18,23 @@ $(function () {
             {value: 13,name: '咨询研究员'},
             {value: 70,name: '考公务员'},
             {value: 52,name: '硬件开发工程师'},
-            {value: 35,name: 'WEB开发工程师'}
+            {value: 35,name: 'WEB开发工程师'},
+            {value: 35,name: 'Python工程师'}
         ];
 
-        option = {
+        var companydata;
+        $.ajaxSettings.async = false;
+        $.getJSON("data/2019company.json", function (data3){
+            companydata = data3;
+        });
+
+        option ={
             backgroundColor: 'rgba(0,0,0,0)',
             tooltip: {
                 trigger: 'item',
                 formatter: "{b}: <br/>{c} ({d}%)"
             },
-            color: ['#af89d6', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847'],
+            color: ['#af89d6', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847'],
             legend: { //图例组件，颜色和名字
                 x: '70%',
                 y: 'center',
@@ -36,7 +43,7 @@ $(function () {
                 itemWidth: 10,
                 itemHeight: 10,
                 icon: 'rect',
-                data: ['行业一', '行业二', '行业三', '行业四', '行业五'],
+                data: ['行业一', '行业二', '行业三', '行业四', '行业五', '行业六'],
                 textStyle: {
                     color: [],
                     fontStyle: 'normal',
@@ -74,7 +81,7 @@ $(function () {
                         }
                     }
                 },
-                data: data
+                data: companydata
             }, {
                 name: '',
                 type: 'pie',
@@ -95,7 +102,7 @@ $(function () {
                         show: false,
                     }
                 },
-                data: data
+                data: companydata
             }]
         };
 
@@ -108,7 +115,11 @@ $(function () {
     function echarts_2() {
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('echarts_2'));
-
+        var echarts_2data;
+        $.ajaxSettings.async = false;
+        $.getJSON("data/gofordata.json", function (data3){
+            echarts_2data = data3;
+        });
         option = {
             backgroundColor: 'rgba(0,0,0,0)',
             tooltip: {
@@ -158,103 +169,7 @@ $(function () {
                         show: true
                     }
                 },
-                data: [{
-                    value: 600,
-                    name: '计算机科学与技术',
-                    itemStyle: {
-                        normal: {
-                            color: '#f845f1'
-                        }
-                    }
-                },
-                    {
-                        value: 1100,
-                        name: '工商管理',
-                        itemStyle: {
-                            normal: {
-                                color: '#ad46f3'
-                            }
-                        }
-                    },
-                    {
-                        value: 1200,
-                        name: '自动化控制工程',
-                        itemStyle: {
-                            normal: {
-                                color: '#5045f6'
-                            }
-                        }
-                    },
-                    {
-                        value: 1300,
-                        name: '通信工程',
-                        itemStyle: {
-                            normal: {
-                                color: '#4777f5'
-                            }
-                        }
-                    },
-                    {
-                        value: 1400,
-                        name: '金融',
-                        itemStyle: {
-                            normal: {
-                                color: '#44aff0'
-                            }
-                        }
-                    },
-
-                    {
-                        value: 0,
-                        name: "",
-                        label: {
-                            show: false
-                        },
-                        labelLine: {
-                            show: false
-                        }
-                    },
-                    {
-                        value: 0,
-                        name: "",
-                        label: {
-                            show: false
-                        },
-                        labelLine: {
-                            show: false
-                        }
-                    },
-                    {
-                        value: 0,
-                        name: "",
-                        label: {
-                            show: false
-                        },
-                        labelLine: {
-                            show: false
-                        }
-                    },
-                    {
-                        value: 0,
-                        name: "",
-                        label: {
-                            show: false
-                        },
-                        labelLine: {
-                            show: false
-                        }
-                    },
-                    {
-                        value: 0,
-                        name: "",
-                        label: {
-                            show: false
-                        },
-                        labelLine: {
-                            show: false
-                        }
-                    }
-                ]
+                data: echarts_2data
             }]
         };
 

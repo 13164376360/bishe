@@ -252,9 +252,9 @@ var geoCoordMap = {
 };
 
 $('.select').on('blur', function () {
-        $(this).find('.select-ul').hide();
-    })
-    //下拉框点击出现下拉框内容
+    $(this).find('.select-ul').hide();
+})
+//下拉框点击出现下拉框内容
 $('.select-div').on('click', function () {
     if ($(this).siblings('.select-ul').is(":hidden")) {
         $(this).siblings('.select-ul').show();
@@ -330,18 +330,18 @@ function chart1() {
         yData = [];
     data.map((a, b) => {
         xData.push(a.name);
-        yData.push(a.value);
-    });
+    yData.push(a.value);
+});
 
 
     var RealData = [];
     var borderData = [];
     data.map((item, index) => {
         var newobj = deepCopy(item);
-        var newobj1 = deepCopy(item);
-        RealData.push(newobj);
-        borderData.push(newobj1);
-    });
+    var newobj1 = deepCopy(item);
+    RealData.push(newobj);
+    borderData.push(newobj1);
+});
     RealData.map((item, index) => {
         item.itemStyle = {
             normal: {
@@ -354,10 +354,10 @@ function chart1() {
                     colorStops: [{
                         offset: 0,
                         color: startColor[index] // 0% 处的颜色
-                }, {
+                    }, {
                         offset: 1,
                         color: startColor[index] // 100% 处的颜色
-                }],
+                    }],
                     globalCoord: false // 缺省为 false
                 },
             }
@@ -375,10 +375,10 @@ function chart1() {
                     colorStops: [{
                         offset: 0,
                         color: borderStartColor[index] // 0% 处的颜色
-                }, {
+                    }, {
                         offset: 1,
                         color: borderStartColor[index] // 100% 处的颜色
-                }],
+                    }],
                     globalCoord: false // 缺省为 false
                 },
             }
@@ -392,7 +392,7 @@ function chart1() {
             formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
         series: [
-        // 主要展示层的
+            // 主要展示层的
             {
                 radius: ['50%', '85%'],
                 center: ['50%', '50%'],
@@ -415,8 +415,8 @@ function chart1() {
                 },
                 name: "派件入库量占比内容",
                 data: RealData
-        },
-        // 边框的设置
+            },
+            // 边框的设置
             {
                 radius: ['45%', '50%'],
                 center: ['50%', '50%'],
@@ -442,8 +442,8 @@ function chart1() {
                     show: false
                 },
                 data: borderData
-        }
-    ]
+            }
+        ]
     };
 
     myChart.setOption(option);
@@ -457,13 +457,13 @@ chart1()
 //------------广东省寄派件数据内容---------------
 //点击筛选按钮
 $('#filBtn').on('click', function () {
-        if ($('#filCon').is(":hidden")) {
-            $('#filCon').attr('style', 'display:flex');
-        } else {
-            $('#filCon').hide();
-        }
-    })
-    //点击筛选按钮end
+    if ($('#filCon').is(":hidden")) {
+        $('#filCon').attr('style', 'display:flex');
+    } else {
+        $('#filCon').hide();
+    }
+})
+//点击筛选按钮end
 
 
 function chart2(chartType) {
@@ -471,87 +471,87 @@ function chart2(chartType) {
         {
             name: '广州市',
             value: 120057.34
-            },
+        },
         {
             name: '韶关市',
             value: 15477.48
-            },
+        },
         {
             name: '深圳市',
             value: 131686.1
-            },
+        },
         {
             name: '珠海市',
             value: 6992.6
-            },
+        },
         {
             name: '汕头市',
             value: 44045.49
-            },
+        },
         {
             name: '佛山市',
             value: 40689.64
-            },
+        },
         {
             name: '江门市',
             value: 37659.78
-            },
+        },
         {
             name: '湛江市',
             value: 45180.97
-            },
+        },
         {
             name: '茂名市',
             value: 5204.26
-            },
+        },
         {
             name: '肇庆市',
             value: 21900.9
-            },
+        },
         {
             name: '惠州市',
             value: 4918.26
-            },
+        },
         {
             name: '梅州市',
             value: 5881.84
-            },
+        },
         {
             name: '汕尾市',
             value: 4178.01
-            },
+        },
         {
             name: '河源市',
             value: 2227.92
-            },
+        },
         {
             name: '阳江市',
             value: 2180.98
-            },
+        },
         {
             name: '清远市',
             value: 9172.94
-            },
+        },
         {
             name: '东莞市',
             value: 3368
-            },
+        },
         {
             name: '中山市',
             value: 306.98
-            },
+        },
         {
             name: '潮州市',
             value: 810.66
-            },
+        },
         {
             name: '揭阳市',
             value: 542.2
-            },
+        },
         {
             name: '云浮市',
             value: 256.38
-            }]
+        }]
 
     var myChart = echarts.init(document.getElementById('gdMap'));
     var myCharts = echarts.init(document.getElementById('gdMaps'));
@@ -565,66 +565,66 @@ function chart2(chartType) {
             yMax = data[j].value;
         }
     }
-        myChart.hideLoading();
-        myCharts.hideLoading();
-        var option = {
-            animation: true,
-            tooltip: {
-                show: true
+    myChart.hideLoading();
+    myCharts.hideLoading();
+    var option = {
+        animation: true,
+        tooltip: {
+            show: true
+        },
+        visualMap: {
+            min: 0,
+            max: yMax,
+            text: ['高', '低'],
+            orient: 'horizontal',
+            itemWidth: 15,
+            itemHeight: 200,
+            right: 0,
+            bottom: 30,
+            inRange: {
+                color: ['#75ddff', '#0e94eb']
             },
-            visualMap: {
-                min: 0,
-                max: yMax,
-                text: ['高', '低'],
-                orient: 'horizontal',
-                itemWidth: 15,
-                itemHeight: 200,
-                right: 0,
-                bottom: 30,
-                inRange: {
-                    color: ['#75ddff', '#0e94eb']
+            textStyle: {
+                color: 'white'
+            }
+        },
+        series: [
+            {
+                name: '数据名称',
+                type: 'map',
+                mapType: '广东',
+                selectedMode: 'multiple',
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}<br/>{c} (件)'
                 },
-                textStyle: {
-                    color: 'white'
-                }
-            },
-            series: [
-                {
-                    name: '数据名称',
-                    type: 'map',
-                    mapType: '广东',
-                    selectedMode: 'multiple',
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: '{b}<br/>{c} (件)'
-                    },
-                    itemStyle: {
-                        normal: {
-                            borderWidth: 1,
-                            borderColor: '#0e94eb',
-                            label: {
-                                show: false
-                            }
-                        },
-                        emphasis: { // 也是选中样式
-                            borderWidth: 1,
-                            borderColor: '#fff',
-                            backgroundColor: 'red',
-                            label: {
-                                show: true,
-                                textStyle: {
-                                    color: '#fff'
-                                }
-                            }
+                itemStyle: {
+                    normal: {
+                        borderWidth: 1,
+                        borderColor: '#0e94eb',
+                        label: {
+                            show: false
                         }
                     },
-                    data: data,
+                    emphasis: { // 也是选中样式
+                        borderWidth: 1,
+                        borderColor: '#fff',
+                        backgroundColor: 'red',
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                },
+                data: data,
             }
-            ]
-        };
+        ]
+    };
 
-        myChart.setOption(option);
-        myCharts.setOption(option);
+    myChart.setOption(option);
+    myCharts.setOption(option);
 }
 chart2('');
 
@@ -866,9 +866,9 @@ $('.city-btn').on('click', 'li', function () {
         if ($(this).parent().data('city') == 1) {
             $('.ranking-box').show();
             if ($("#barType").find('.active').data('value') == 1) {
-                $('#titleQ').html('<span>全网</span>到河南');
+                $('#titleQ').html('<span>全网</span>到珠海');
             } else if ($("#barType").find('.active').data('value') == 2) {
-                $('#titleQ').html('河南到<span>全网</span>')
+                $('#titleQ').html('珠海到<span>全网</span>')
             }
             $('#city').html(li_con);
         } else if ($(this).parent().data('city') == 2) {
@@ -958,9 +958,9 @@ function chart3(type, chartType) {
     var data_; //模拟数据
     if (type == 1) {
         data_ = [{
-                name: "入库件",
-                value: 584
-            },
+            name: "入库件",
+            value: 584
+        },
             {
                 name: "滞留件",
                 value: 152
@@ -984,26 +984,26 @@ function chart3(type, chartType) {
             }]
     } else if (type == 2) {
         data_ = [{
-                name: "入库件",
-                value: 568
-                }, {
-                name: "丢失件",
-                value: 287
-                }, {
-                name: "滞留件",
-                value: 120
-                },
+            name: "入库件",
+            value: 568
+        }, {
+            name: "丢失件",
+            value: 287
+        }, {
+            name: "滞留件",
+            value: 120
+        },
             {
                 name: "撤销件",
                 value: 152
-                },
+            },
             {
                 name: "出库件",
                 value: 125
-                }, {
+            }, {
                 name: "正常件",
                 value: 122
-        }]
+            }]
     }
     var series_data; //绘制图表的数据
     //绘制图表
@@ -1250,7 +1250,7 @@ function chart3(type, chartType) {
                     }
                 },
                 data: [0, data_[5], 0, 0, 0, 0],
-                },
+            },
             {
                 name: '丢失件',
                 type: 'bar',
@@ -1264,7 +1264,7 @@ function chart3(type, chartType) {
                     }
                 },
                 data: [0, 0, 0, data_[1], 0],
-                    },
+            },
             {
                 name: '滞留件',
                 type: 'bar',
@@ -1280,7 +1280,7 @@ function chart3(type, chartType) {
                 },
 
                 data: [0, data_[2], 0, 0, 0],
-                    },
+            },
             {
                 name: '撤销件',
                 type: 'bar',
@@ -1294,7 +1294,7 @@ function chart3(type, chartType) {
                     }
                 },
                 data: [0, 0, 0, 0, data_[3]],
-                    },
+            },
             {
                 name: '出库件',
                 type: 'bar',
@@ -1309,9 +1309,9 @@ function chart3(type, chartType) {
                     }
                 },
                 data: [0, 0, data_[4], 0, 0],
-                    }
+            }
 
-                    ]
+        ]
     }
 
     var option = {
@@ -1324,15 +1324,15 @@ function chart3(type, chartType) {
             show: true
         },
         xAxis: [{
-                type: 'category',
-                show: false,
-                data: data,
-                axisLabel: {
-                    textStyle: {
-                        color: '#fff'
-                    }
+            type: 'category',
+            show: false,
+            data: data,
+            axisLabel: {
+                textStyle: {
+                    color: '#fff'
                 }
-            },
+            }
+        },
             {
                 type: 'category',
                 position: "bottom",
@@ -1367,44 +1367,44 @@ function chart3(type, chartType) {
                     show: false
                 },
                 z: 10
-        },
+            },
         ],
         yAxis: [{
-                show: true,
-                splitLine: {
-                    show: false,
-                    lineStyle: {
-                        color: "#0e94eb"
-                    }
-                },
-                axisTick: {
-                    show: false
-                },
-                axisLine: {
-                    show: false
-                },
-                axisLabel: {
-                    show: true,
-                    color: '#0e94eb'
-                }
-        }, {
+            show: true,
+            splitLine: {
                 show: false,
-                type: "value",
-                nameTextStyle: {
-                    color: '#0e94eb'
-                },
-                axisLabel: {
-                    color: '#0e94eb'
-                },
-                splitLine: {
-                    show: false
-                },
-                axisLine: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
+                lineStyle: {
+                    color: "#0e94eb"
                 }
+            },
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                show: false
+            },
+            axisLabel: {
+                show: true,
+                color: '#0e94eb'
+            }
+        }, {
+            show: false,
+            type: "value",
+            nameTextStyle: {
+                color: '#0e94eb'
+            },
+            axisLabel: {
+                color: '#0e94eb'
+            },
+            splitLine: {
+                show: false
+            },
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            }
         },
             {
                 axisLine: {
@@ -1418,7 +1418,7 @@ function chart3(type, chartType) {
                         color: '#999'
                     }
                 }
-                }],
+            }],
         //        color: ['#e54035'],
         series: series_data
     }
@@ -1437,9 +1437,9 @@ function chart3(type, chartType) {
 }
 
 chart3(1, '')
-    //
-    //
-    //
+//
+//
+//
 $('#dateBtn').on('click', function () {
     if ($('#timeBox').is(":hidden")) {
         $('#timeBox').show();
@@ -1607,39 +1607,36 @@ function dateCss() {
 var chart4Data = [{
     'name': "天津市",
     'value': 178546
-    }, {
+}, {
     'name': "湖南省",
     'value': 125687
-    }, {
+}, {
     'name': "福建省",
     'value': 78452
-    }, {
+}, {
     'name': "北京市",
     'value': 57841
-    }, {
+}, {
     'name': "江苏省",
     'value': 45879
-    }, {
+}, {
     'name': "海南",
     'value': 28584
-    }, {
+}, {
     'name': "四川省",
     'value': 14852
-    }, {
+}, {
     'name': "浙江省",
     'value': 12589
-    }, {
+}, {
     'name': "重庆市",
     'value': 5261
-    }, {
+}, {
     'name': "香港特别行政区",
     'value': 2563
-    }, {
+}, {
     'name': "内蒙古",
     'value': 856
-    }, {
-    'name': "新疆",
-    'value': 432
 }]
 chart4(chart4Data, 1, '');
 
