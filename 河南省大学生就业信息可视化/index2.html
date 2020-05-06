@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>河南省大学生就业分析可视化</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/map.css">
+</head>
+<body>
+<div class="data">
+
+    <div class="data-title">
+         <h1 style="color: #00C1B3" align="center" font-sie="300px">河南省大学生就业分析平台</h1>
+        <div class="title-left fl"></div>
+
+        <div class="title-right fr"></div>
+    </div>
+    <div class="data-content">
+        <div class="con-left fl">
+            <div class="left-top">
+                <div class="info">
+                    <div class="info-title">毕业生情况</div>
+                    <img src="img/bj-1.png" alt="" class="bj-1">
+                    <img src="img/bj-2.png" alt="" class="bj-2">
+                    <img src="img/bj-3.png" alt="" class="bj-3">
+                    <img src="img/bj-4.png" alt="" class="bj-4">
+                    <div class="info-main">
+                        <div class="info-1">
+                            <div class="info-img fl">
+                                <img src="img/info-img-1.png" alt="">
+                            </div>
+                            <div class="info-text fl">
+                                <p>2019年河南省毕业生人数</p>
+                                <p>3011120</p>
+                            </div>
+                        </div>
+                        <div class="info-2">
+                            <div class="info-img fl">
+                                <img src="img/info-img-2.png" alt="">
+                            </div>
+                            <div class="info-text fl">
+                                <p>选择就业人数</p>
+                                <p>201987</p>
+                            </div>
+                        </div>
+                        <div class="info-3">
+                            <div class="info-img fl">
+                                <img src="img/info-img-3.png" alt="">
+                            </div>
+                            <div class="info-text fl">
+                                <p>选择考研人数</p>
+                                <p>109824</p>
+                            </div>
+                        </div>
+                        <div class="info-4">
+                            <div class="info-img fl">
+                                <img src="img/info-img-4.png" alt="">
+                            </div>
+                            <div class="info-text fl">
+                                <p>就业率(%)</p>
+                                <p>４0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="top-bottom">
+                    <div class="title">意向岗位分类</div>
+                    <img src="img/bj-1.png" alt="" class="bj-1">
+                    <img src="img/bj-2.png" alt="" class="bj-2">
+                    <img src="img/bj-3.png" alt="" class="bj-3">
+                    <img src="img/bj-4.png" alt="" class="bj-4">
+                    <div id="echarts_1" class="charts"></div>
+                </div>
+            </div>
+            <div class="left-bottom">
+                <div class="title">专业分类</div>
+                <img src="img/bj-1.png" alt="" class="bj-1">
+                <img src="img/bj-2.png" alt="" class="bj-2">
+                <img src="img/bj-3.png" alt="" class="bj-3">
+                <img src="img/bj-4.png" alt="" class="bj-4">
+                <div id="echarts_2" class="charts"></div>
+            </div>
+        </div>
+        <div class="con-center fl">
+            <div class="map-num">
+                <p>就业意向城市分布</p>
+                <div class="num">
+                    <span>1</span>
+                    <span>,</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>,</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                </div>
+            </div>
+            <div class="cen-top" id="map"></div>
+            <div class="cen-bottom">
+                <div class="title">意向薪资分布趋势</div>
+                <img src="img/bj-1.png" alt="" class="bj-1">
+                <img src="img/bj-2.png" alt="" class="bj-2">
+                <img src="img/bj-3.png" alt="" class="bj-3">
+                <img src="img/bj-4.png" alt="" class="bj-4">
+                <div id="echarts_3" class="charts"></div>
+            </div>
+        </div>
+        <div class="con-right fr">
+            <div class="right-top">
+                <div class="title">意向薪资分析</div>
+                <img src="img/bj-1.png" alt="" class="bj-1">
+                <img src="img/bj-2.png" alt="" class="bj-2">
+                <img src="img/bj-3.png" alt="" class="bj-3">
+                <img src="img/bj-4.png" alt="" class="bj-4">
+                <div id="echarts_4" class="charts"></div>
+            </div>
+            <div class="right-center">
+                <div class="title">受欢迎的专业</div>
+                <img src="img/bj-1.png" alt="" class="bj-1">
+                <img src="img/bj-2.png" alt="" class="bj-2">
+                <img src="img/bj-3.png" alt="" class="bj-3">
+                <img src="img/bj-4.png" alt="" class="bj-4">
+                <div id="echarts_5" class="charts"></div>
+            </div>
+            <div class="right-bottom">
+                <div class="title">就业意向城市</div>
+                <img src="img/bj-1.png" alt="" class="bj-1">
+                <img src="img/bj-2.png" alt="" class="bj-2">
+                <img src="img/bj-3.png" alt="" class="bj-3">
+                <img src="img/bj-4.png" alt="" class="bj-4">
+                <div id="echarts_6" class="charts"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/china.js"></script>
+<script src="js/echarts.js"></script>
+</html>
