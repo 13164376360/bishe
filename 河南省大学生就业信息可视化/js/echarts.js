@@ -5,7 +5,9 @@ $(function () {
     echarts_2();
     map();
     echarts_3();
+    //意向薪资分析
     echarts_4();
+    //受欢迎的专业
     echarts_5();
     echarts_6();
 
@@ -24,7 +26,7 @@ $(function () {
 
         var companydata;
         $.ajaxSettings.async = false;
-        $.getJSON("data/2019company.json", function (data3){
+        $.getJSON("data/2019zzulihangye.json", function (data3){
             companydata = data3;
         });
 
@@ -117,7 +119,7 @@ $(function () {
         var myChart = echarts.init(document.getElementById('echarts_2'));
         var echarts_2data;
         $.ajaxSettings.async = false;
-        $.getJSON("data/gofordata.json", function (data3){
+        $.getJSON("data/2019zzulixinzi.json", function (data3){
             echarts_2data = data3;
         });
         option = {
@@ -142,9 +144,9 @@ $(function () {
                 //起始角度，支持范围[0, 360]
                 startAngle: 0,
                 //饼图的半径，数组的第一项是内半径，第二项是外半径
-                radius: [41, 110],
+                radius: [20, 60],
                 //支持设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度
-                center: ['50%', '20%'],
+                center: ['50%', '50%'],
                 //是否展示成南丁格尔图，通过半径区分数据大小。可选择两种模式：
                 // 'radius' 面积展现数据的百分比，半径展现数据的大小。
                 //  'area' 所有扇区面积相同，仅通过半径展现数据大小
@@ -195,32 +197,51 @@ $(function () {
         myChart.showLoading();
         var mapFeatures = echarts.getMap(mapName).geoJson.features;
         myChart.hideLoading();
+
+        var mapData;
+        $.ajaxSettings.async = false;
+        $.getJSON("data/2019fromto.json", function (data3){
+            mapData = data3;
+        });
+
         mapFeatures.forEach(function(v) {
             // 地区名称
             var name = v.properties.name;
             // 地区经纬度
             geoCoordMap[name] = v.properties.cp;
+            var to,tonum;
+            var from,fromnum;
+            for (var i=0;i<mapData.length;i++){
+                if (name == mapData[i].province) {
+                    to = mapData[i].to;
+                    tonum = mapData[i].tonum;
+                    from = mapData[i].from;
+                    fromnum = mapData[i].fromnum;
+                    break;
+                }
+            } ;
+            // mapData.forEach(function (v) {
+            //     if (name == v.province) {
+            //         to = v.to;
+            //         tonum = v.tonum;
+            //         from = v.from;
+            //         fromnum = v.fromnum;
+            //     }
+            // });
             data.push({
                 name: name,
                 value: Math.round(Math.random() * 100 + 10)
-            })
+            });
             toolTipData.push({
                 name: name,
-                value: [{
-                    name: "软件工程",
-                    value: Math.round(Math.random() * 100 + 10)
-                },
+                value: [
                     {
-                        name: "人工智能",
-                        value: Math.round(Math.random() * 100 + 10)
+                        name: to,
+                        value: tonum
                     },
                     {
-                        name: "大数据",
-                        value: Math.round(Math.random() * 100 + 10)
-                    },
-                    {
-                        name: "金融科技",
-                        value: Math.round(Math.random() * 100 + 10)
+                        name: from,
+                        value: fromnum
                     }
                 ]
             })
@@ -293,7 +314,7 @@ $(function () {
             visualMap: {
                 show: false,
                 min: 0,
-                max: 600,
+                max: 1000,
                 left: 'left',
                 top: 'bottom',
                 text: ['高', '低'], // 文本，默认为数值文本
@@ -311,7 +332,8 @@ $(function () {
                     // color: ['#00467F', '#A5CC82'] // 蓝绿
                     // color: ['#00467F', '#A5CC82'] // 蓝绿
                     // color: ['#00467F', '#A5CC82'] // 蓝绿
-                    color: ['#22e5e8', '#0035f9','#22e5e8'] // 蓝绿
+                    color: ['#22e5e8', '#5688f9','#482ee8'], // 蓝绿
+                    symbolSize: [10, 1000]
 
                 }
             },
@@ -481,7 +503,17 @@ $(function () {
     function echarts_3() {
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('echarts_3'));
-
+        var echarts_3data;
+        $.ajaxSettings.async = false;
+        $.getJSON("data/2019zzulijiuyelv.json", function (data3){
+            echarts_3data = data3;
+        });
+        echarts_3dataName = [];
+        echarts_3dataValue = [];
+        for (var i=0;i<echarts_3data.length;i++){
+            echarts_3dataName[i] = echarts_3data[i].name;
+            echarts_3dataValue[i] = (echarts_3data[i].value*100).toFixed(2);
+        }
         option = {
 
             tooltip : {
@@ -495,7 +527,7 @@ $(function () {
                 left: '3%',
                 right: '3%',
                 top:'8%',
-                bottom: '5%',
+                bottom: '10%',
                 containLabel: true
             },
             color:['#a4d8cc','#25f3e6'],
@@ -551,13 +583,14 @@ $(function () {
                         }
 
                     },
-                    data: ['0K','1k','2K','3K','4K','5K','6K','7K','8K','9K','10K','11K','12K','13K','14K','15K','16K','17K'
-                        ,'18K','19K','20K','21K','22K','23K']
+                    data: echarts_3dataName
                 }
             ],
             yAxis : {
 
                 type : 'value',
+                min : 70,
+                max : 100,
                 axisLabel: {
                     textStyle: {
                         color: '#ccc',
@@ -597,7 +630,7 @@ $(function () {
                     itemStyle: {
                         normal: {areaStyle: {type: 'default'}}
                     },
-                    data:[710, 312, 321,754, 500, 830, 710, 521, 504, 660, 530, 410,710, 312, 321,754, 500, 830, 710, 521, 504, 660, 530, 410]
+                    data:echarts_3dataValue
                 }
             ]
         };
@@ -612,12 +645,27 @@ $(function () {
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('echarts_4'));
 
+        //数据
+        var echarts_4Data;
+        $.ajaxSettings.async = false;
+        $.getJSON("data/2019zzulixueyuan.json", function (data3){
+            echarts_4Data = data3;
+        });
         option = {
 
             tooltip : {
                 trigger: 'item',
-                formatter: "{b}: <br/>  {c} ({d}%)"
+                /*formatter: "{b}: <br/>  {c} ({d}%)",*/
+                formatter: function(params) {
+                    if (params.seriesName != "") {
+                        return params.name+"<br/>"+
+                               "学生人数："+params.value+"("+(params.data.value1*100).toFixed(2)+"%)<br/>"+
+                               "就业人数："+params.data.value2+"<br/>"+
+                               "就业率："+(params.data.value3*100).toFixed(2)+"%";
+                    }
+                },
             },
+
 
             toolbox: {
                 show : false,
@@ -638,18 +686,11 @@ $(function () {
                 {
                     name:'排名',
                     type:'pie',
-                    color: ['#af89d6', '#f5c847', '#ff999a', '#0089ff','#25f3e6'],
+                    color: ['#af89d6', '#f5c847', '#ff999a', '#0089ff','#25f3e6', '#f5c847', '#ff999a', '#0089ff','#25f3e6', '#f5c847', '#ff999a', '#0089ff','#25f3e6', '#f5c847', '#ff999a', '#0089ff','#25f3e6', '#f5c847', '#ff999a', '#0089ff','#25f3e6'],
                     radius : [20, 100],
                     center : ['50%', '50%'],
                     roseType : 'area',
-                    data:[
-                        {value:6000, name:'NO.4'},
-                        {value:7000, name:'NO.3'},
-                        {value:9000, name:'NO.2'},
-                        {value:1500, name:'NO.1'},
-                        {value:5000, name:'NO.5'}
-
-                    ]
+                    data : echarts_4Data
                 }
             ]
         };
@@ -665,8 +706,20 @@ $(function () {
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('echarts_5'));
 
+        //数据
+        var echarts_5Data;
+        $.ajaxSettings.async = false;
+        $.getJSON("data/gofordata.json", function (data3){
+            echarts_5Data = data3;
+        });
+        var dataValue = [];
         var xData = function() {
             var data = ['软件工程','人工智能','大数据','金融学','会计学'];
+            data=[];
+            for (var i=0;i<echarts_5Data.length;i++){
+                data[i] = echarts_5Data[i].name;
+                dataValue[i]= echarts_5Data[i].value;
+            }
 
             return data;
         }();
@@ -684,7 +737,7 @@ $(function () {
                 // extraCssText: 'box-shadow: 0 0 3px rgba(255, 255, 255, 0.4);', //添加阴影
                 formatter: function(params) {
                     if (params.seriesName != "") {
-                        return params.name + ' ：  ' + params.value + '次';
+                        return params.name + ' ：  ' + params.value + '次'+"</br>"+params.name + ' ：  ' + params.value + '次';
                     }
                 },
 
@@ -722,7 +775,8 @@ $(function () {
                     //     return val.split("").join("\n")
                     // },
                 },
-                data: xData,
+                // data: xData,
+                data : xData
             }, {
                 type: 'category',
                 axisLine: {
@@ -791,7 +845,8 @@ $(function () {
                 },
                 zlevel: 2,
                 barWidth: '20%',
-                data: data,
+                // data: data,
+                data : dataValue
             },
                 {
                     name: '',
