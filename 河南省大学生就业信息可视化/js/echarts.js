@@ -46,11 +46,12 @@ function echarts_1(filename) {
         {value: 35, name: 'Python工程师'}
     ];
 
-    var companydata;
+    var echarts_1Data;
+    var yearSchool = filename;
     filename=filename+'hangye.json'
     $.ajaxSettings.async = false;
-    $.getJSON("data/"+filename, function (data3) {
-        companydata = data3;
+    $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
+        echarts_1Data = data3;
     });
 
     option = {
@@ -106,7 +107,7 @@ function echarts_1(filename) {
                     }
                 }
             },
-            data: companydata
+            data: echarts_1Data
         }, {
             name: '',
             type: 'pie',
@@ -127,7 +128,7 @@ function echarts_1(filename) {
                     show: false,
                 }
             },
-            data: companydata
+            data: echarts_1Data
         }]
     };
 
@@ -142,10 +143,16 @@ function echarts_2(filename) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echarts_2'));
     var echarts_2data;
+    var yearSchool = filename;
+    filename=filename+'xinzi.json'
     $.ajaxSettings.async = false;
-    $.getJSON("data/2019zzulixinzi.json", function (data3) {
+    $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
         echarts_2data = data3;
     });
+    /*$.ajaxSettings.async = false;
+    $.getJSON("data/2019zzulixinzi.json", function (data3) {
+        echarts_2data = data3;
+    });*/
     option = {
         backgroundColor: 'rgba(0,0,0,0)',
         tooltip: {
@@ -209,7 +216,7 @@ function echarts_2(filename) {
     });
 }
 
-function map() {
+function map(filename) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('map'));
 
@@ -227,10 +234,16 @@ function map() {
     myChart.hideLoading();
 
     var mapData;
+    var yearSchool = filename;
+    filename=filename+'city.json'
     $.ajaxSettings.async = false;
-    $.getJSON("data/2019fromto.json", function (data3) {
+    $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
         mapData = data3;
     });
+    /*$.ajaxSettings.async = false;
+    $.getJSON("data/2019fromto.json", function (data3) {
+        mapData = data3;
+    });*/
 
     mapFeatures.forEach(function (v) {
         // 地区名称
@@ -531,14 +544,20 @@ function map() {
     });
 }
 
-function echarts_3() {
+function echarts_3(filename) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echarts_3'));
     var echarts_3data;
+    var yearSchool = filename;
+    filename=filename+'jiuyelv.json'
     $.ajaxSettings.async = false;
-    $.getJSON("data/2019zzulijiuyelv.json", function (data3) {
+    $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
         echarts_3data = data3;
     });
+    /*$.ajaxSettings.async = false;
+    $.getJSON("data/2019zzulijiuyelv.json", function (data3) {
+        echarts_3data = data3;
+    });*/
     echarts_3dataName = [];
     echarts_3dataValue = [];
     for (var i = 0; i < echarts_3data.length; i++) {
@@ -674,16 +693,22 @@ function echarts_3() {
     });
 }
 
-function echarts_4() {
+function echarts_4(filename) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echarts_4'));
 
     //数据
     var echarts_4Data;
+    var yearSchool = filename;
+    filename=filename+'xueyuan.json'
     $.ajaxSettings.async = false;
-    $.getJSON("data/2019zzulixueyuan.json", function (data3) {
+    $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
         echarts_4Data = data3;
     });
+    /*$.ajaxSettings.async = false;
+    $.getJSON("data/2019zzulixueyuan.json", function (data3) {
+        echarts_4Data = data3;
+    });*/
     option = {
 
         tooltip: {
@@ -736,16 +761,22 @@ function echarts_4() {
     });
 }
 
-function echarts_5() {
+function echarts_5(filename) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echarts_5'));
 
     //数据
     var echarts_5Data;
+    var yearSchool = filename;
+    filename=filename+'channel.json'
     $.ajaxSettings.async = false;
-    $.getJSON("data/2019zzulichannel.json", function (data3) {
+    $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
         echarts_5Data = data3;
     });
+    /*$.ajaxSettings.async = false;
+    $.getJSON("data/2019zzulichannel.json", function (data3) {
+        echarts_5Data = data3;
+    });*/
     var dataValue = [];
     var xData = function () {
         var data = ['软件工程', '人工智能', '大数据', '金融学', '会计学'];
@@ -913,50 +944,20 @@ function echarts_5() {
     });
 }
 
-function echarts_6() {
+function echarts_6(filename) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echarts_6'));
-
-    var data = {
-        "chart": [{
-            month: "北京",
-            value: 600,
-
-        },
-
-            {
-                month: "上海",
-                value: 500,
-
-            },
-
-            {
-                month: "深圳",
-                value: 614,
-
-            },
-
-            {
-                month: "浙江",
-                value: 442,
-
-            },
-
-            {
-                month: "成都",
-                value: 322
-
-            }
-
-        ]
-    }
-
-
     var echarts_6data;
+    var yearSchool = filename;
+    filename=filename+'pipei.json'
     $.ajaxSettings.async = false;
-    $.getJSON("data/2019zzulipipei.json", function (data3) {
+    $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
         echarts_6data = data3;
     });
+    /*$.ajaxSettings.async = false;
+    $.getJSON("data/2019zzulipipei.json", function (data3) {
+        echarts_6data = data3;
+    });*/
     var xAxisMonth = [],
         barData = [],
         lineData = [];

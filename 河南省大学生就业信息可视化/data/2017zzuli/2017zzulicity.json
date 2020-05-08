@@ -3,7 +3,7 @@
     "province": "安徽",
     "coordinate": "[117.17,31.52]",
     "to": "毕业生去向",
-    "tonum": 66,
+    "tonum": 666,
     "from": "生源",
     "fromnum": 112
   },
@@ -11,7 +11,7 @@
     "province": "澳门",
     "coordinate": "[115.07,21.33]",
     "to": "毕业生去向",
-    "tonum": 2,
+    "tonum": 233,
     "from": "生源",
     "fromnum": 0
   },
@@ -21,7 +21,7 @@
     "to": "毕业生去向",
     "tonum": 234,
     "from": "生源",
-    "fromnum": 20
+    "fromnum": 2000
   },
   {
     "province": "福建",
