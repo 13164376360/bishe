@@ -107,22 +107,22 @@ html,body{
     font-weight: 600;
     font-size: 14px;
 }
-.data>.data-content>.con-left>.left-top>.info>.info-main>.info-1> .info-text>p:nth-child(2){
+.data>.data-content>.con-left>.left-top>.info>.info-main>.info-1> .info-text>p:nth-child(2) > a{
     font-weight: 600;
     color:#ffff44;
     font-size: 22px;
 }
-.data>.data-content>.con-left>.left-top>.info>.info-main>.info-2> .info-text>p:nth-child(2){
+.data>.data-content>.con-left>.left-top>.info>.info-main>.info-2> .info-text>p:nth-child(2) > a{
     font-weight: 600;
     color:#25f3e6;
     font-size: 22px;
 }
-.data>.data-content>.con-left>.left-top>.info>.info-main>.info-3> .info-text>p:nth-child(2){
+.data>.data-content>.con-left>.left-top>.info>.info-main>.info-3> .info-text>p:nth-child(2) > a{
     font-weight: 600;
     color:#f84a4a;
     font-size: 22px;
 }
-.data>.data-content>.con-left>.left-top>.info>.info-main>.info-4> .info-text>p:nth-child(2){
+.data>.data-content>.con-left>.left-top>.info>.info-main>.info-4> .info-text>p:nth-child(2) > a{
     font-weight: 600;
     color:#f5c847;
     font-size: 22px;
