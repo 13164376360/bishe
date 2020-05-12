@@ -33,6 +33,15 @@ $(function () {
     echarts_6(filename);
 })
 
+function testSearch() {
+
+    var str = "123"
+    console.log(str.search("2") != -1); // true
+
+    var str2 = "信息传输";
+
+}
+
 function echarts_1(filename) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echarts_1'));
@@ -50,12 +59,17 @@ function echarts_1(filename) {
     var yearSchool = filename;
     filename='hangye.json';
     var j = 0;
+    var testSearch = [];
+    var testKeyWord="信息传输";
     $.ajaxSettings.async = false;
     $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
         for (var i=0;i<data3.length;i++){
             if (data3[i].school_code == school && data3[i].year == year){
                 echarts_1Data[j]=data3[i];
                 j++;
+                if (data3[i].name.search(testKeyWord) != -1) {
+                    testSearch[j]=data3[i];
+                }
             }
         }
         // echarts_1Data = data3;
@@ -276,14 +290,26 @@ function map(filename) {
         geoCoordMap[name] = v.properties.cp;
         var to = '毕业生去向', tonum, tobili;
         var from = '生源', fromnum, frombili;
+        var fromdata;
         for (var i = 0; i < mapData.length; i++) {
+            if (name=='台湾'){
+                fromnum=0;
+            }
             if (name == mapData[i].province) {
                 // to = mapData[i].to;
                 tonum = mapData[i].people_number;
                 tobili = mapData[i].people_proportion;
                 // from = mapData[i].from;
-                fromnum = mapData[i].people_from_number;
+                if (mapData[i].people_from_number&&mapData[i].people_from_number!='undefined') {
+                    fromnum = mapData[i].people_from_number;
+                }else{
+                    fromnum = 0;
+                }
                 frombili = mapData[i].people_from_proportion;
+                fromdata=fromnum;
+                if (fromnum>1000){
+                    fromdata = 500
+                }
                 break;
             }
         }
@@ -298,7 +324,7 @@ function map(filename) {
         // });
         data.push({
             name: name,
-            value: Math.round(Math.random() * 100 + 10)
+            value: fromdata
         });
         toolTipData.push({
             name: name,
@@ -383,26 +409,26 @@ function map(filename) {
         visualMap: {
             show: false,
             min: 0,
-            max: 1000,
+            max: 500,
             left: 'left',
             top: 'bottom',
             text: ['高', '低'], // 文本，默认为数值文本
             calculable: true,
             seriesIndex: [1],
             inRange: {
-                color: ['#3B5077', '#031525'], // 蓝黑
-                color: ['#ffc0cb', '#800080'], // 红紫
-                color: ['#3C3B3F', '#605C3C'], // 黑绿
-                color: ['#0f0c29', '#302b63', '#24243e'], // 黑紫黑
-                color: ['#23074d', '#cc5333'], // 紫红
-                color: ['#00467F', '#A5CC82'], // 蓝绿
-                color: ['#1488CC', '#2B32B2'], // 浅蓝
-                color: ['#00467F', '#A5CC82','#ffc0cb'], // 蓝绿红
-                color: ['#00467F', '#A5CC82'], // 蓝绿
-                color: ['#00467F', '#A5CC82'], // 蓝绿
-                color: ['#00467F', '#A5CC82'], // 蓝绿
-                color: ['#22e5e8', '#5688f9', '#482ee8'], // 蓝绿
-                symbolSize: [10, 1000]
+                // color: ['#3B5077', '#031525'], // 蓝黑
+                // color: ['#ffc0cb', '#800080'], // 红紫
+                // color: ['#3C3B3F', '#605C3C'], // 黑绿
+                // color: ['#0f0c29', '#302b63', '#24243e'], // 黑紫黑
+                // color: ['#23074d', '#cc5333'], // 紫红
+                // color: ['#00467F', '#A5CC82'], // 蓝绿
+                // color: ['#1488CC', '#2B32B2'], // 浅蓝
+                // color: ['#00467F', '#A5CC82','#ffc0cb'], // 蓝绿红
+                // color: ['#00467F', '#A5CC82'], // 蓝绿
+                // color: ['#00467F', '#A5CC82'], // 蓝绿
+                // color: ['#00467F', '#A5CC82'], // 蓝绿
+                color: ['#73dae1', '#80c8f9', '#4d73e8','#3747e8', '#0f13e8','#0b04e8'], // 蓝绿
+                symbolSize: [10, 50, 100, 200, 300, 500]
 
             }
         },
@@ -449,6 +475,7 @@ function map(filename) {
             coordinateSystem: 'geo',
             data: convertData(data),
             symbolSize: function (val) {
+                if (val)
                 return val[2] / 10;
             },
             label: {
@@ -531,12 +558,12 @@ function map(filename) {
                 data: convertData(data),
             },
             {
-                name: 'Top 5',
+                name: 'Top 10',
                 type: 'effectScatter',
                 coordinateSystem: 'geo',
                 data: convertData(data.sort(function (a, b) {
                     return b.value - a.value;
-                }).slice(0, 5)),
+                }).slice(0, 10)),
                 symbolSize: function (val) {
                     return val[2] / 10;
                 },
