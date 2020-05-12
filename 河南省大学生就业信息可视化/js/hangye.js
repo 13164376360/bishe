@@ -1,12 +1,12 @@
 var companydata;
 var school='zzuli';
 var year='2019';
-var filename='2019zzuli';
+var filename='allData';
 function refreshPage() {
 
     school = $("#school").val();
     year = $("#year").val();
-    filename = year+school;
+    filename = 'allData';
     if (filename) {
         //企业类型
         echarts_6(filename);
@@ -50,13 +50,23 @@ function echarts_1(filename) {
         {value: 35, name: 'Python工程师'}
     ];
 
-    var echarts_1Data;
+    var echarts_1Data=[];
     var yearSchool = filename;
-    filename=filename+'hangye.json'
+    filename='hangye.json'
+    var j = 0;
     $.ajaxSettings.async = false;
     $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
-        echarts_1Data = data3;
+        for (var i=0;i<data3.length;i++){
+            if (data3[i].school_code == school && data3[i].year == year){
+                echarts_1Data[j]=data3[i];
+                j++;
+            }
+        }
+        // echarts_3data = data3;
     });
+    /*$.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
+        echarts_1Data = data3;
+    });*/
 
     option = {
         backgroundColor: 'rgba(0,0,0,0)',
@@ -146,13 +156,24 @@ function echarts_1(filename) {
 function echarts_2(filename) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echarts_2'));
-    var echarts_2data;
+    var echarts_2data=[];
     var yearSchool = filename;
-    filename=filename+'hangyejingji.json'
+    filename='hangyejingji.json'
+    var j = 0;
     $.ajaxSettings.async = false;
     $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
-        echarts_2data = data3;
+        for (var i=0;i<data3.length;i++){
+            if (data3[i].school_code == school && data3[i].year == year){
+                echarts_2data[j]=data3[i];
+                j++;
+            }
+        }
+        // echarts_3data = data3;
     });
+    /*$.ajaxSettings.async = false;
+    $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
+        echarts_2data = data3;
+    });*/
     /*$.ajaxSettings.async = false;
     $.getJSON("data/2019zzulixinzi.json", function (data3) {
         echarts_2data = data3;
@@ -702,13 +723,24 @@ function echarts_4(filename) {
     var myChart = echarts.init(document.getElementById('echarts_4'));
 
     //数据
-    var echarts_4Data;
+    var echarts_4Data=[];
     var yearSchool = filename;
-    filename=filename+'hangyeliuxiang.json'
+    filename='hangyeliuxiang.json'
+    var j = 0;
     $.ajaxSettings.async = false;
     $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
-        echarts_4Data = data3;
+        for (var i=0;i<data3.length;i++){
+            if (data3[i].school_code == school && data3[i].year == year){
+                echarts_4Data[j]=data3[i];
+                j++;
+            }
+        }
+        // echarts_3data = data3;
     });
+    /*$.ajaxSettings.async = false;
+    $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
+        echarts_4Data = data3;
+    });*/
     /*$.ajaxSettings.async = false;
     $.getJSON("data/2019zzulixueyuan.json", function (data3) {
         echarts_4Data = data3;
@@ -951,13 +983,24 @@ function echarts_5(filename) {
 function echarts_6(filename) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echarts_6'));
-    var echarts_6data;
+    var echarts_6data=[];
     var yearSchool = filename;
-    filename=filename+'hangyetype.json'
+    filename='hangyetype.json'
+    var j = 0;
     $.ajaxSettings.async = false;
     $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
-        echarts_6data = data3;
+        for (var i=0;i<data3.length;i++){
+            if (data3[i].school_code == school && data3[i].year == year){
+                echarts_6data[j]=data3[i];
+                j++;
+            }
+        }
+        // echarts_3data = data3;
     });
+    /*$.ajaxSettings.async = false;
+    $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
+        echarts_6data = data3;
+    });*/
     /*$.ajaxSettings.async = false;
     $.getJSON("data/2019zzulipipei.json", function (data3) {
         echarts_6data = data3;

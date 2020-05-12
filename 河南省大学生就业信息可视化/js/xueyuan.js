@@ -1,12 +1,12 @@
 var companydata;
 var school='zzuli';
 var year='2019';
-var filename='2019zzuli';
+var filename='allData';
 function refreshPage() {
 
     school = $("#school").val();
     year = $("#year").val();
-    filename = year+school;
+    filename = 'allData';
     if (filename) {
         echarts_3(filename);
         //意向薪资分析
@@ -547,12 +547,19 @@ function map(filename) {
 function echarts_3(filename) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echarts_3'));
-    var echarts_3data;
+    var echarts_3Data = [];
     var yearSchool = filename;
-    filename=filename+'jiuyelv.json'
+    filename='xueyuanjiuyelv.json';
+    var j = 0;
     $.ajaxSettings.async = false;
     $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
-        echarts_3data = data3;
+        for (var i=0;i<data3.length;i++){
+            if (data3[i].school_code == school && data3[i].year == year){
+                echarts_3Data[j]=data3[i];
+                j++;
+            }
+        }
+        // echarts_3data = data3;
     });
     /*$.ajaxSettings.async = false;
     $.getJSON("data/2019zzulijiuyelv.json", function (data3) {
@@ -560,9 +567,9 @@ function echarts_3(filename) {
     });*/
     echarts_3dataName = [];
     echarts_3dataValue = [];
-    for (var i = 0; i < echarts_3data.length; i++) {
-        echarts_3dataName[i] = echarts_3data[i].name;
-        echarts_3dataValue[i] = (echarts_3data[i].value * 100).toFixed(2);
+    for (var i = 0; i < echarts_3Data.length; i++) {
+        echarts_3dataName[i] = echarts_3Data[i].name;
+        echarts_3dataValue[i] = (echarts_3Data[i].value * 100).toFixed(2);
     }
     option = {
 
@@ -698,12 +705,19 @@ function echarts_4(filename) {
     var myChart = echarts.init(document.getElementById('echarts_4'));
 
     //数据
-    var echarts_4Data;
+    var echarts_4Data=[];
     var yearSchool = filename;
-    filename=filename+'xueyuan.json'
+    filename='xueyuan.json';
+    var j = 0;
     $.ajaxSettings.async = false;
     $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
-        echarts_4Data = data3;
+        for (var i=0;i<data3.length;i++){
+            if (data3[i].school_code == school && data3[i].year == year){
+                echarts_4Data[j]=data3[i];
+                j++;
+            }
+        }
+        // echarts_4Data = data3;
     });
     /*$.ajaxSettings.async = false;
     $.getJSON("data/2019zzulixueyuan.json", function (data3) {
@@ -717,9 +731,9 @@ function echarts_4(filename) {
             formatter: function (params) {
                 if (params.seriesName != "") {
                     return params.name + "<br/>" +
-                        "学生人数：" + params.value + "(" + (params.data.value1 * 100).toFixed(2) + "%)<br/>" +
-                        "就业人数：" + params.data.value2 + "<br/>" +
-                        "就业率：" + (params.data.value3 * 100).toFixed(2) + "%";
+                        "学生人数：" + params.value + "(" + (params.data.xueyuan_bili * 100).toFixed(2) + "%)<br/>" +
+                        "就业人数：" + params.data.xueyuan_jiuye_num + "<br/>" +
+                        "就业率：" + (params.data.jiuyelv * 100).toFixed(2) + "%";
                 }
             },
         },
