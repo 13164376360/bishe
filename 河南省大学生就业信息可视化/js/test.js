@@ -65,7 +65,10 @@ function echarts_1(filename) {
         backgroundColor: 'rgba(0,0,0,0)',
         tooltip: {
             trigger: 'item',
-            formatter: "{b}: <br/>{c} ({d}%)"
+            // formatter: "{b}: <br/>{c} ({d}%)"
+            formatter: function (params) {
+                return params.name + "<br/>" + '单位数量：'+params.data.number+'<br/>占比: ' + (params.value * 100).toFixed(2) + '%';
+            }
         },
         color: ['#af89d6', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847', '#4ac7f5', '#0089ff', '#f36f8a', '#f5c847'],
         legend: { //图例组件，颜色和名字
@@ -230,7 +233,7 @@ function echarts_2(filename) {
     });
 }
 
-function map(filefname) {
+function map(filename) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('map'));
 
@@ -252,7 +255,7 @@ function map(filefname) {
     filename='city.json';
     var j = 0;
     $.ajaxSettings.async = false;
-    $.getJSON("data/"+yearSchool+"/"+g, function (data3) {
+    $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
         for (var i=0;i<data3.length;i++){
             if (data3[i].school_code == school && data3[i].year == year){
                 mapData[j]=data3[i];
@@ -271,14 +274,16 @@ function map(filefname) {
         var name = v.properties.name;
         // 地区经纬度
         geoCoordMap[name] = v.properties.cp;
-        var to, tonum;
-        var from, fromnum;
+        var to = '毕业生去向', tonum, tobili;
+        var from = '生源', fromnum, frombili;
         for (var i = 0; i < mapData.length; i++) {
             if (name == mapData[i].province) {
-                to = mapData[i].to;
-                tonum = mapData[i].tonum;
-                from = mapData[i].from;
-                fromnum = mapData[i].fromnum;
+                // to = mapData[i].to;
+                tonum = mapData[i].people_number;
+                tobili = mapData[i].people_proportion;
+                // from = mapData[i].from;
+                fromnum = mapData[i].people_from_number;
+                frombili = mapData[i].people_from_proportion;
                 break;
             }
         }
@@ -300,11 +305,13 @@ function map(filefname) {
             value: [
                 {
                     name: to,
-                    value: tonum
+                    value: tonum,
+                    bili: tobili
                 },
                 {
                     name: from,
-                    value: fromnum
+                    value: fromnum,
+                    bili: frombili
                 }
             ]
         })
@@ -341,7 +348,7 @@ function map(filefname) {
                         if (params.name == toolTipData[i].name) {
                             toolTiphtml += toolTipData[i].name + ':<br>'
                             for (var j = 0; j < toolTipData[i].value.length; j++) {
-                                toolTiphtml += toolTipData[i].value[j].name + ':' + toolTipData[i].value[j].value + "<br>"
+                                toolTiphtml += toolTipData[i].value[j].name + ':' + toolTipData[i].value[j].value+'  占比('+(toolTipData[i].value[j].bili*100).toFixed(2)+'%)' + "<br>"
                             }
                         }
                     }
@@ -383,17 +390,17 @@ function map(filefname) {
             calculable: true,
             seriesIndex: [1],
             inRange: {
-                // color: ['#3B5077', '#031525'] // 蓝黑
-                // color: ['#ffc0cb', '#800080'] // 红紫
-                // color: ['#3C3B3F', '#605C3C'] // 黑绿
-                //  color: ['#0f0c29', '#302b63', '#24243e'] // 黑紫黑
-                // color: ['#23074d', '#cc5333'] // 紫红
-                //   color: ['#00467F', '#A5CC82'] // 蓝绿
-                // color: ['#1488CC', '#2B32B2'] // 浅蓝
-                // color: ['#00467F', '#A5CC82','#ffc0cb'] // 蓝绿红
-                // color: ['#00467F', '#A5CC82'] // 蓝绿
-                // color: ['#00467F', '#A5CC82'] // 蓝绿
-                // color: ['#00467F', '#A5CC82'] // 蓝绿
+                color: ['#3B5077', '#031525'], // 蓝黑
+                color: ['#ffc0cb', '#800080'], // 红紫
+                color: ['#3C3B3F', '#605C3C'], // 黑绿
+                color: ['#0f0c29', '#302b63', '#24243e'], // 黑紫黑
+                color: ['#23074d', '#cc5333'], // 紫红
+                color: ['#00467F', '#A5CC82'], // 蓝绿
+                color: ['#1488CC', '#2B32B2'], // 浅蓝
+                color: ['#00467F', '#A5CC82','#ffc0cb'], // 蓝绿红
+                color: ['#00467F', '#A5CC82'], // 蓝绿
+                color: ['#00467F', '#A5CC82'], // 蓝绿
+                color: ['#00467F', '#A5CC82'], // 蓝绿
                 color: ['#22e5e8', '#5688f9', '#482ee8'], // 蓝绿
                 symbolSize: [10, 1000]
 
@@ -570,11 +577,11 @@ function echarts_3(filename) {
     var myChart = echarts.init(document.getElementById('echarts_3'));
     var echarts_3Data = [];
     var yearSchool = filename;
-    filename='jiuyelv.json';
+    filename='xueyuanjiuyelv.json';
+    var j = 0;
     $.ajaxSettings.async = false;
     $.getJSON("data/"+yearSchool+"/"+filename, function (data3) {
         for (var i=0;i<data3.length;i++){
-            var j = 0;
             if (data3[i].school_code == school && data3[i].year == year){
                 echarts_3Data[j]=data3[i];
                 j++;
@@ -588,9 +595,9 @@ function echarts_3(filename) {
     });*/
     echarts_3dataName = [];
     echarts_3dataValue = [];
-    for (var i = 0; i < echarts_3data.length; i++) {
-        echarts_3dataName[i] = echarts_3data[i].name;
-        echarts_3dataValue[i] = (echarts_3data[i].value * 100).toFixed(2);
+    for (var i = 0; i < echarts_3Data.length; i++) {
+        echarts_3dataName[i] = echarts_3Data[i].name;
+        echarts_3dataValue[i] = (echarts_3Data[i].value * 100).toFixed(2);
     }
     option = {
 
@@ -625,12 +632,13 @@ function echarts_3(filename) {
             {
                 type: 'category',
 
-                axisTick: {show: false},
+                axisTick: {show: true},
 
                 boundaryGap: false,
                 axisLabel: {
                     textStyle: {
                         color: '#ccc',
+                        fontWeight: 'normal',
                         fontSize: '12'
                     },
                     lineStyle: {
@@ -752,9 +760,9 @@ function echarts_4(filename) {
             formatter: function (params) {
                 if (params.seriesName != "") {
                     return params.name + "<br/>" +
-                        "学生人数：" + params.value + "(" + (params.data.value1 * 100).toFixed(2) + "%)<br/>" +
-                        "就业人数：" + params.data.value2 + "<br/>" +
-                        "就业率：" + (params.data.value3 * 100).toFixed(2) + "%";
+                        "学生人数：" + params.value + "(" + (params.data.xueyuan_bili * 100).toFixed(2) + "%)<br/>" +
+                        "就业人数：" + params.data.xueyuan_jiuye_num + "<br/>" +
+                        "就业率：" + (params.data.jiuyelv * 100).toFixed(2) + "%";
                 }
             },
         },
@@ -1010,22 +1018,22 @@ function echarts_6(filename) {
     var xAxisMonth = [],
         barData = [],
         lineData = [];
-    for (var i = 0; i < echarts_6data.length; i++) {
-        xAxisMonth.push(echarts_6data[i].name);
+    for (var i = 0; i < echarts_6Data.length; i++) {
+        xAxisMonth.push(echarts_6Data[i].name);
         barData.push({
             "name": xAxisMonth[i],
-            "value": echarts_6data[i].value
+            "value": echarts_6Data[i].value
         });
         lineData.push({
             "name": xAxisMonth[i],
-            "value": echarts_6data[i].ratio
+            "value": echarts_6Data[i].ratio
         });
     }
     echarts_6dataName = [];
     echarts_6dataValue = [];
-    for (var i = 0; i < echarts_6data.length; i++) {
-        echarts_6dataName = echarts_6data[i].name;
-        echarts_6dataValue = echarts_6data[i].value;
+    for (var i = 0; i < echarts_6Data.length; i++) {
+        echarts_6dataName = echarts_6Data[i].name;
+        echarts_6dataValue = echarts_6Data[i].value;
     }
 
     option = {
