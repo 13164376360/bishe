@@ -124,6 +124,9 @@
                     </select>
                     <input type="text" id="bili" name="bili" placeholder="0.XXXX">
                     <button id="cityyuce" name="cityyuce" onclick="cityyuce()"> 预测 </button>
+                    <div class="title" style="margin-top: 20px">预测结果：</div>
+                    </br>
+                    <p id="resule1" class="resulttips"></p>
                 </div>
                 <img src="img/bj-1.png" alt="" class="bj-1">
                 <img src="img/bj-2.png" alt="" class="bj-2">
@@ -139,8 +142,19 @@
                         <option value="oneline">一线省市</option>
                         <option value="other">其他城市</option>
                     </select>
-                    <input type="text" id="XXX" name="" placeholder="请输入绩点">
+                    <select id="hot" name="hot">
+                        <option value="6">请选择专业热度</option>
+                        <option value="6">热门专业</option>
+                        <option value="0">一般专业</option>
+                        <option value="-5">比较冷门</option>
+                        <option value="-15">特别冷门</option>
+                    </select>
+                    <!--<input type="text" id="XXX" name="" placeholder="请输入绩点">-->
                     <button id="XXXX" name="" onclick="jiuyelvyuce()"> 预测 </button>
+                    <div class="title" style="margin-top: 20px">预测结果：</div>
+                    </br>
+                    <p id="resule2" class="resulttips"></p>
+
                 </div>
                 <img src="img/bj-1.png" alt="" class="bj-1">
                 <img src="img/bj-2.png" alt="" class="bj-2">
@@ -153,13 +167,18 @@
                 <div class="title">薪资预测</div>
                 <div class="selectS">
                     <select id="city2" name="city">
-                        <option value="henan">请选择去向省市类型</option>
-                        <option value="henan">河南省</option>
-                        <option value="oneline">一线省市</option>
-                        <option value="other">其他城市</option>
+                        <option value="300">请选择去向省市类型</option>
+                        <option value="300">一线省市</option>
+                        <option value="200">二线省市</option>
+                        <option value="150">三线省市</option>
+                        <option value="120">四线省市</option>
+                        <option value="100">五线省市</option>
                     </select>
-                    <input type="text" id="GPA" name="GPA" placeholder="请输入绩点">
+<!--                    <input type="text" id="GPA" name="GPA" placeholder="请输入绩点">-->
                     <button id="xinziyuce" name="xinziyuce" onclick="xinziyuce()"> 预测 </button>
+                    <div class="title" style="margin-top: 20px">预测结果：</div>
+                    </br>
+                    <p id="resule3" class="resulttips"></p>
                 </div>
                 <img src="img/bj-1.png" alt="" class="bj-1">
                 <img src="img/bj-2.png" alt="" class="bj-2">
@@ -169,11 +188,27 @@
             <div class="right-center">
                 <div class="title">综合预测</div>
                 <div class="selectS">
-                    <input type="text" id="1" name="" placeholder="请输入期望城市">
-                    <input type="text" id="2" name="" placeholder="请输入GPA">
+                    <select id="city4" name="city">
+                        <option value="henan">请选择去向省市类型</option>
+                        <option value="henan">河南省</option>
+                        <option value="oneline">一线省市</option>
+                        <option value="other">其他城市</option>
+                    </select>
+                    <select id="hot4" name="hot">
+                        <option value="6">请选择专业热度</option>
+                        <option value="6">热门专业</option>
+                        <option value="0">一般专业</option>
+                        <option value="-5">比较冷门</option>
+                        <option value="-15">特别冷门</option>
+                    </select>
+                    <input type="text" id="bili4" name="bili4" placeholder="请输入生源比例">
+                    <!--<input type="text" id="2" name="" placeholder="请输入GPA">
                     <input type="text" id="3" name="" placeholder="请输入专业">
-                    <input type="text" id="4" name="" placeholder="请输入论文">
+                    <input type="text" id="4" name="" placeholder="请输入论文">-->
                     <button id="zongheyuce" name="zongheyuce" onclick="zongheyuce()"> 预测 </button>
+                    <div class="title" style="margin-top: 20px">预测结果：</div>
+                    </br>
+                    <p id="resule4" class="resulttips"></p>
                 </div>
                 <img src="img/bj-1.png" alt="" class="bj-1">
                 <img src="img/bj-2.png" alt="" class="bj-2">
